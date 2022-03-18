@@ -8,10 +8,17 @@ export const membersService = {
       .catch((err) => console.log(`Error trying to get ${org} data:`, err));
     return members;
   },
-  // async getMember(id: Member["id"], org: string): Promise<Member | undefined> {
-  //   if (!id) throw new Error("id is required");
-  //   return this.get(org).then((list) => {
-  //     return list.find((item: Member) => String(item.id) === String(id));
-  //   });
-  // },
+  async getMember(username: Member["login"]): Promise<Member | undefined> {
+    if (!username) throw new Error("username is required");
+    const URL = `https://api.github.com/users/${username}`;
+    const member = await fetch(URL)
+      .then((res) => res.json())
+      .catch((err) =>
+        console.log(
+          `Error trying to get the user with username ${username}:`,
+          err
+        )
+      );
+    return member;
+  },
 };

@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div class="member-detail-page">
     <Suspense>
       <template #default>
-        <MembersList />
+        <MemberDetail />
       </template>
       <template #fallback> Loading... </template>
     </Suspense>
@@ -11,12 +11,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MembersList from "@/components/MembersList.vue"; // @ is an alias to /src
+import MemberDetail from "@/components/MemberDetail.vue"; // @ is an alias to /src
 
 export default defineComponent({
-  name: "Home",
+  name: "MemberDetailPage",
   components: {
-    MembersList,
+    MemberDetail,
   },
 });
 </script>

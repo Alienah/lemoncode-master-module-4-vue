@@ -16,8 +16,10 @@
         </template>
       </el-table-column>
       <el-table-column label="Actions" width="120">
-        <template #default>
-          <el-button size="large" @click="handleClick">Detail</el-button>
+        <template #default="scope">
+          <router-link :to="`/detail/${scope.row.login}`">
+            <el-button size="large">Detail</el-button>
+          </router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -32,13 +34,8 @@ export default defineComponent({
   async setup() {
     const { membersList } = await useMembersApi();
 
-    const handleClick = () => {
-      console.log("click");
-    };
-
     return {
       membersList,
-      handleClick,
     };
   },
 });
