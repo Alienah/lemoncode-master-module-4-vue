@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <MembersList />
+    <Suspense>
+      <template #default>
+        <MembersList />
+      </template>
+      <template #fallback> Loading... </template>
+    </Suspense>
   </div>
 </template>
 
