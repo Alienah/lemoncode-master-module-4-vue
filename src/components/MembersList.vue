@@ -1,11 +1,26 @@
 <template>
   <div class="members-list_container">
     <h2>Members List</h2>
-    <ul class="members-list">
-      <li v-for="member in membersList" :key="member.id">
-        {{ member.login }}
-      </li>
-    </ul>
+    <el-table class="members-table" :data="membersList" stripe fit>
+      <el-table-column class-name="column--avatar" label="Avatar" width="120">
+        <template #default="scope">
+          <div class="avatar-container">
+            <el-avatar :size="85" :src="scope.row.avatar_url" />
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="id" label="Id" width="140" />
+      <el-table-column label="Name" min-width="120">
+        <template #default="scope">
+          <el-tag size="large">{{ scope.row.login }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="Actions" width="120">
+        <template #default>
+          <el-button size="large" @click="handleClick">Detail</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -17,23 +32,35 @@ export default defineComponent({
   async setup() {
     const { membersList } = await useMembersApi();
 
+    const handleClick = () => {
+      console.log("click");
+    };
+
     return {
       membersList,
+      handleClick,
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
-ul {
-  list-style-type: none;
-  padding: 0;
+.members-table {
+  width: 100%;
+  margin: 16px 0;
 }
-li {
-  display: inline-block;
-  margin: 0 12px;
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
 }
-a {
-  color: #42b983;
+
+.column--avatar {
+  padding-left: 24px;
+}
+
+.el-tag {
+  font-size: var(--el-font-size-base);
 }
 </style>
