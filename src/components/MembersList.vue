@@ -1,6 +1,8 @@
 <template>
   <div class="members-list_container">
-    <h2>Members List</h2>
+    <h2>{{ organizationName }} Members List</h2>
+    <Search @search="onSearch" />
+    <p class="total"><strong>Total of members:</strong> {{ totalMembers }}</p>
     <el-table class="members-table" :data="membersList" stripe fit>
       <el-table-column class-name="column--avatar" label="Avatar" width="120">
         <template #default="scope">
@@ -27,21 +29,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, Ref, ref } from "vue";
 import useMembersApi from "@/composables/membersApi";
 
 export default defineComponent({
   async setup() {
-    const { membersList } = await useMembersApi();
+    const organizationName: Ref<string> = ref("Lemoncode");
+    const { membersList, totalMembers } = await useMembersApi(organizationName);
+
+    const onSearch = (organization: string) => {
+      organizationName.value = organization;
+    };
 
     return {
       membersList,
+      onSearch,
+      organizationName,
+      totalMembers,
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
+.total {
+  text-align: end;
+  padding: 4px 24px;
+}
+
 .members-table {
   width: 100%;
   margin: 16px 0;
