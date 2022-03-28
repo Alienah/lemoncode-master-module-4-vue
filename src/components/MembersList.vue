@@ -52,6 +52,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.members-list_container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .total {
   text-align: end;
   padding: 4px 24px;
