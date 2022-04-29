@@ -2,13 +2,13 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    Header: typeof import("./src/components/Header.vue")["default"];
-    MemberDetail: typeof import("./src/components/MemberDetail.vue")["default"];
-    MembersList: typeof import("./src/components/MembersList.vue")["default"];
-    Search: typeof import("./src/components/Search.vue")["default"];
+    Header: typeof import('./src/components/Header.vue')['default']
+    MemberDetail: typeof import('./src/components/MemberDetail.vue')['default']
+    MembersList: typeof import('./src/components/MembersList.vue')['default']
+    Search: typeof import('./src/components/Search.vue')['default']
   }
 }
 
-export {};
+export { }
