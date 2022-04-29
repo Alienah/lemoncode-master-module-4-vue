@@ -28,27 +28,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, Ref, ref } from "vue";
+<!-- Note: You can see an example of composition api using the setup function in MemberDetail component -->
+<script lang="ts" setup>
+import { computed } from "vue";
 import useMembersApi from "@/composables/membersApi";
+import { useStore } from "vuex";
 
-export default defineComponent({
-  async setup() {
-    const organizationName: Ref<string> = ref("Lemoncode");
-    const { membersList, totalMembers } = await useMembersApi(organizationName);
+const module = "OrgSearchModule";
 
-    const onSearch = (organization: string) => {
-      organizationName.value = organization;
-    };
-
-    return {
-      membersList,
-      onSearch,
-      organizationName,
-      totalMembers,
-    };
-  },
+const store = useStore();
+const organizationName = computed(() => {
+  return store.state[module].orgSearched;
 });
+const { membersList, totalMembers } = await useMembersApi(organizationName);
+
+const onSearch = (organization: string) => {
+  store.dispatch(`${module}/setOrgSearched`, organization);
+};
 </script>
 
 <style scoped lang="scss">

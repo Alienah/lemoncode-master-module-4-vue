@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
+import OrgSearchModule from "./OrgSearch";
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    OrgSearchModule,
+  },
 });

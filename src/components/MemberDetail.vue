@@ -18,6 +18,9 @@
   </div>
 </template>
 
+<!-- This is an example of compositionApi without using the syntax <script lang="ts" setup></script> -->
+<!-- Here, we have to specify a function called setup returning the values that we want to use in the template -->
+<!-- With the syntax <script lang="ts" setup></script> We don't need to do that. See MembersList or Search components to see the other way -->
 <script lang="ts">
 import { defineComponent } from "vue";
 import useMemberDetailApi from "@/composables/memberDetailApi";

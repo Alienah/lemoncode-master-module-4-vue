@@ -20,7 +20,6 @@ const useMembersApi = async (
   const membersList: Ref<Member[]> = ref([]);
 
   if (isRef(org)) {
-    console.log("holiii");
     watchEffect(async () => {
       membersList.value = await membersService.get(orgValue.value);
     });
